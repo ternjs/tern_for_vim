@@ -1,4 +1,4 @@
-# Tern for Sublime Text
+# Tern for Vim
 
 This is a [Vim][vim] plugin that provides [Tern][tern]-based
 JavaScript editing support.
