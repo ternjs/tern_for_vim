@@ -1,0 +1,129 @@
+*tern.txt*   a plugin for the javascript code analysis engine tern.
+
+==============================================================================
+CONTENTS                                                         *tern-contents*
+
+    1. Intro........................................|tern-intro|
+    2. Installation.................................|tern-install|
+    3. Usage........................................|tern-usage|
+    4. Commands.....................................|tern-commands|
+    5. Options......................................|tern-options|
+
+==============================================================================
+INTRO                                                               *tern-intro*
+
+This plugin integrates features of the tern (http://ternjs.net) code analysis
+engine into vim. It provides features such as semantic code completion and
+intelligent renaming.
+
+==============================================================================
+INSTALLATION                                                      *tern-install*
+
+Install the plugin using your prefered plugin manager or copy the files
+to your ~/.vim directory manually. Make sure you have npm and node installed
+and run the following from the root path of the plugin (the same directory
+in which the file package.json is located): >
+
+    $ npm install
+>
+This will install the tern server and all required dependencies.
+Note : This plugin requires vim 7.3+ and builtin python support to work.
+
+==============================================================================
+USAGE                                                               *tern-usage*
+
+After installation vim will use the tern supplied omnifunc to handle
+omnicomplete calls for javascript files. In order to set up tern for
+use with your project you should create a '.tern-project' file in the root
+directory of your project. The following is just an example:
+>
+    {
+      "libs": [
+        "browser",
+        "jquery"
+      ],
+      "loadEagerly": [
+        "importantfile.js"
+      ],
+      "plugins": {
+        "requirejs": {
+          "baseURL": "./",
+          "paths": {}
+        }
+      }
+    }
+>
+
+This will tell the tern server to load definitions for jquery and the
+browser environment. Furthermore it will parse 'importantfile.js' on start up
+and register the requirejs plugin.
+
+For more detailed description of this configuration please refer to the online
+documentation of tern which can be found at http://ternjs.net/doc/manual.html
+
+==============================================================================
+COMMANDS                                                         *tern-commands*
+
+The following commands are available:
+
+    |TernDoc|....................... Look up Documentation
+    |TernDocBrowse|................. Browse the Documentation
+    |TernType|...................... Perform a type look up
+    |TernDef|....................... Look up definition
+    |TernDefPreview|................ Look up definition in preview
+    |TernDefSplit|.................. Look up definition in new split
+    |TernDefTab|.................... Look up definition in new tab
+    |TernRefs|...................... Look up references
+    |TernRename|.................... Rename identifier
+
+------------------------------------------------------------------------------
+                                                                       *TernDoc*
+Look up the documentation of something.
+
+------------------------------------------------------------------------------
+                                                                 *TernDocBrowse*
+Open the documentation in an external browser.
+
+------------------------------------------------------------------------------
+                                                                      *TernType*
+Find the type of the identifier under the cursor.
+
+------------------------------------------------------------------------------
+                                                                       *TernDef*
+Jump to the definition of the identifier under the cursor.
+
+------------------------------------------------------------------------------
+                                                                *TernDefPreview*
+Jump to the definition of the identifier under the cursor inside
+the preview window.
+
+------------------------------------------------------------------------------
+                                                                  *TernDefSplit*
+Jump to the definition of the identifier under the cursor in a new split.
+
+------------------------------------------------------------------------------
+                                                                    *TernDefTab*
+Jump to the definition of the identifier under the cursor in a new tab.
+
+------------------------------------------------------------------------------
+                                                                      *TernRefs*
+List all references of the identifier under the cursor.
+
+------------------------------------------------------------------------------
+                                                                    *TernRename*
+Rename the variable under the cursor.
+
+==============================================================================
+OPTIONS                                                           *tern-install*
+
+The following commands are available:
+
+    |tern#is_show_argument_hints_enabled|....... Configure argument hints display
+
+
+-------------------------------------------------------------------------------
+                                                 *is_show_argument_hints_enabled*
+Enable the display of function arguments on the command line during
+insert mode: >
+    let tern#is_show_argument_hints_enabled = 1
+>
