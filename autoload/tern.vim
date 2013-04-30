@@ -1,3 +1,8 @@
+if !has('python')
+    echo 'tern requires python support'
+    finish
+endif
+
 py << endpy
 
 import vim, os, platform, subprocess, urllib2, webbrowser, json, re, string
