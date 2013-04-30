@@ -1,3 +1,14 @@
+
+if &cp || exists('g:tern_loaded')
+    finish
+endif
+
+if !has('python')
+    echo 'tern requires python support'
+    finish
+endif
+let g:tern_loaded = 1
+
 py << endpy
 
 import vim, os, platform, subprocess, urllib2, webbrowser, json, re, string
