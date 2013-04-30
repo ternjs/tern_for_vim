@@ -1,3 +1,14 @@
+
+if &cp || exists('g:tern_loaded')
+    finish
+endif
+
+if !has('python')
+    echo 'tern requires python support'
+    finish
+endif
+let g:tern_loaded = 1
+
 py << endpy
 
 import vim, os, platform, subprocess, urllib2, webbrowser, json, re, string
@@ -404,6 +415,26 @@ command! TernRename exe 'py tern_rename("'.input("new name? ",expand("<cword>"))
 function! tern#is_show_argument_hints_enabled()
   return exists('g:tern_show_argument_hints') && g:tern_show_argument_hints
 endfunction
+
+if !exists('g:tern_map_keys')
+    let g:tern_map_keys = 1
+endif
+
+if !exists('g:tern_map_prefix')
+    let g:tern_map_prefix = '<leader>'
+endif
+
+if g:tern_map_keys
+    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'td' ':TernDoc<CR>'
+    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tb' ':TernDocBrowse<CR>'
+    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tt' ':TernType<CR>'
+    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'td' ':TernDef<CR>'
+    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tpd' ':TernDefPreview<CR>'
+    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tsd' ':TernDefSplit<CR>'
+    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'ttd' ':TernDefTab<CR>'
+    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tr' ':TernRefs<CR>'
+    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tR' ':TernRename<CR>'
+endif
 
 function! tern#Enable()
   if stridx(&buftype, "nofile") > -1 || stridx(&buftype, "nowrite") > -1
