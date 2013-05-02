@@ -83,7 +83,7 @@ def tern_killServer(ternPID):
   if platform.system() == "Windows":
     subprocess.call("taskkill /t /f /pid " + ternPID,shell=True)
   else:
-    os.kill(int(ternPID),3)
+    os.kill(int(ternPID), 2)
 
 def tern_relativeFile():
   filename = vim.eval("expand('%:p')")
