@@ -48,3 +48,6 @@ Tern uses `.tern-project` files to configure loading libraries and
 plugins for a project. See the [Tern docs][docs] for details.
 
 [docs]: http://ternjs.net/doc/manual.html#configuration
+[path]: https://github.com/tpope/vim-pathogen
+[node]: http://nodejs.org/
+[npm]: https://npmjs.org/
