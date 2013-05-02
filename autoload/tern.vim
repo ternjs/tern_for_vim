@@ -74,7 +74,7 @@ def tern_startServer():
     if match:
       port = int(match.group(1))
       vim.command("let b:ternPort = " + str(port))
-      vim.command("let g:ternPID = "+str(proc.pid))
+      vim.command("let b:ternPID = "+str(proc.pid))
       return port
     else:
       output += line
@@ -438,7 +438,7 @@ function! tern#Disable()
 endfunction
 
 function! tern#Shutdown()
-  if exists('g:ternPID')
-    python tern_killServer(vim.eval("g:ternPID"))
+  if exists('b:ternPID')
+    python tern_killServer(vim.eval("b:ternPID"))
   endif
 endfunction
