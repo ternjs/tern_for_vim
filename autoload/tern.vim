@@ -411,7 +411,7 @@ function! tern#is_show_argument_hints_enabled()
 endfunction
 
 if !exists('g:tern_map_keys')
-    let g:tern_map_keys = 1
+    let g:tern_map_keys = 0
 endif
 
 if !exists('g:tern_map_prefix')
