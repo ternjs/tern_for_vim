@@ -383,7 +383,7 @@ function! tern#LookupType()
 endfunction
 
 function! tern#LookupArgumentHints()
-  if !tern#is_show_argument_hints_enabled()
+  if g:tern_show_argument_hints == 'no'
     return
   endif
   let fname = get(matchlist(getline('.')[:col('.')-2],'\([a-zA-Z0-9_]*\)([^()]*$'),1)
@@ -406,28 +406,28 @@ command! TernDefTab py tern_lookupDefinition("tabe")
 command! TernRefs py tern_refs()
 command! TernRename exe 'py tern_rename("'.input("new name? ",expand("<cword>")).'")'
 
-function! tern#is_show_argument_hints_enabled()
-  return exists('g:tern_show_argument_hints') && g:tern_show_argument_hints
-endfunction
+if !exists('g:tern_show_argument_hints')
+  let g:tern_show_argument_hints = 'no'
+endif
 
 if !exists('g:tern_map_keys')
-    let g:tern_map_keys = 0
+  let g:tern_map_keys = 0
 endif
 
 if !exists('g:tern_map_prefix')
-    let g:tern_map_prefix = '<leader>'
+  let g:tern_map_prefix = '<leader>'
 endif
 
 if g:tern_map_keys
-    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'td' ':TernDoc<CR>'
-    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tb' ':TernDocBrowse<CR>'
-    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tt' ':TernType<CR>'
-    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'td' ':TernDef<CR>'
-    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tpd' ':TernDefPreview<CR>'
-    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tsd' ':TernDefSplit<CR>'
-    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'ttd' ':TernDefTab<CR>'
-    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tr' ':TernRefs<CR>'
-    execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tR' ':TernRename<CR>'
+  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'td' ':TernDoc<CR>'
+  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tb' ':TernDocBrowse<CR>'
+  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tt' ':TernType<CR>'
+  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'td' ':TernDef<CR>'
+  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tpd' ':TernDefPreview<CR>'
+  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tsd' ':TernDefSplit<CR>'
+  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'ttd' ':TernDefTab<CR>'
+  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tr' ':TernRefs<CR>'
+  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tR' ':TernRename<CR>'
 endif
 
 function! tern#Enable()
@@ -444,7 +444,11 @@ function! tern#Enable()
   augroup TernAutoCmd
     autocmd! * <buffer>
     autocmd BufLeave <buffer> :py tern_sendBufferIfDirty()
-    autocmd CursorMoved,CursorMovedI <buffer> call tern#LookupArgumentHints()
+    if g:tern_show_argument_hints == 'on_move'
+      autocmd CursorMoved,CursorMovedI <buffer> call tern#LookupArgumentHints()
+    elseif g:tern_show_argument_hints == 'on_hold'
+      autocmd CursorHold,CursorHoldI <buffer> call tern#LookupArgumentHints()
+    endif
     autocmd InsertEnter <buffer> let b:ternInsertActive = 1
     autocmd InsertLeave <buffer> let b:ternInsertActive = 0
   augroup END

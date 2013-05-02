@@ -114,16 +114,18 @@ List all references of the identifier under the cursor.
 Rename the variable under the cursor.
 
 ==============================================================================
-OPTIONS                                                           *tern-install*
+OPTIONS                                                           *tern-options*
 
-The following commands are available:
+The following options are available:
 
-    |tern#is_show_argument_hints_enabled|....... Configure argument hints display
-
+    |tern_show_argument_hints|....... Configure argument hints display.
 
 -------------------------------------------------------------------------------
-                                                 *is_show_argument_hints_enabled*
-Enable the display of function arguments on the command line during
-insert mode: >
-    let tern#is_show_argument_hints_enabled = 1
->
+                                                      *tern_show_argument_hints*
+
+Defaults to |'no'|. Can be set to |'on_move'| to update the argument
+hints whenever the cursor moves, or |'on_hold'| to do it whenever the
+cursor is held still for a period that depends on the |updatetime|
+setting. |'on_move'| can reduce responsiveness on slow systems or big
+codebases. |'on_hold'| probably requires you to set |updatetime| to
+something smaller than the default of 4 seconds.
