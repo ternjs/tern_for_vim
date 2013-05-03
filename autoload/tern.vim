@@ -415,20 +415,21 @@ if !exists('g:tern_map_keys')
 endif
 
 if !exists('g:tern_map_prefix')
-  let g:tern_map_prefix = '<leader>'
+  let g:tern_map_prefix = '<LocalLeader>'
 endif
 
-if g:tern_map_keys
-  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'td' ':TernDoc<CR>'
-  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tb' ':TernDocBrowse<CR>'
-  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tt' ':TernType<CR>'
-  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'td' ':TernDef<CR>'
-  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tpd' ':TernDefPreview<CR>'
-  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tsd' ':TernDefSplit<CR>'
-  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'ttd' ':TernDefTab<CR>'
-  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tr' ':TernRefs<CR>'
-  execute 'autocmd FileType javascript' 'nnoremap <buffer>' g:tern_map_prefix.'tR' ':TernRename<CR>'
-endif
+function! tern#DefaultKeyMap(...)
+  let prefix = len(a:000)==1 ? a:1 : "<LocalLeader>"
+  execute 'nnoremap <buffer> '.prefix.'td' ':TernDoc<CR>'
+  execute 'nnoremap <buffer> '.prefix.'tb' ':TernDocBrowse<CR>'
+  execute 'nnoremap <buffer> '.prefix.'tt' ':TernType<CR>'
+  execute 'nnoremap <buffer> '.prefix.'td' ':TernDef<CR>'
+  execute 'nnoremap <buffer> '.prefix.'tpd' ':TernDefPreview<CR>'
+  execute 'nnoremap <buffer> '.prefix.'tsd' ':TernDefSplit<CR>'
+  execute 'nnoremap <buffer> '.prefix.'ttd' ':TernDefTab<CR>'
+  execute 'nnoremap <buffer> '.prefix.'tr' ':TernRefs<CR>'
+  execute 'nnoremap <buffer> '.prefix.'tR' ':TernRename<CR>'
+endfunction
 
 function! tern#Enable()
   if stridx(&buftype, "nofile") > -1 || stridx(&buftype, "nowrite") > -1
@@ -441,6 +442,9 @@ function! tern#Enable()
   let b:ternBufferSentAt = -1
   let b:ternInsertActive = 0
   setlocal omnifunc=tern#Complete
+  if g:tern_map_keys
+    call tern#DefaultKeyMap(g:tern_map_prefix)
+  endif
   augroup TernAutoCmd
     autocmd! * <buffer>
     autocmd BufLeave <buffer> :py tern_sendBufferIfDirty()
