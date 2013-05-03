@@ -452,8 +452,11 @@ function! tern#Enable()
     autocmd InsertEnter <buffer> let b:ternInsertActive = 1
     autocmd InsertLeave <buffer> let b:ternInsertActive = 0
   augroup END
-  autocmd VimLeavePre * call tern#Shutdown()
 endfunction
+
+augroup TernShutDown
+  autocmd VimLeavePre * call tern#Shutdown()
+augroup END
 
 function! tern#Disable()
   augroup TernAutoCmd
