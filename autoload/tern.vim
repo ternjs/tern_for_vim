@@ -14,7 +14,8 @@ def tern_displayError(err):
 
 def tern_makeRequest(port, doc):
   try:
-    req = urllib2.urlopen("http://localhost:" + str(port) + "/", json.dumps(doc), 1)
+    timeout = int(vim.eval("g:tern_server_timeout"))
+    req = urllib2.urlopen("http://localhost:" + str(port) + "/", json.dumps(doc), timeout)
     return json.loads(req.read())
   except urllib2.HTTPError, error:
     tern_displayError(error.read())
@@ -416,6 +417,10 @@ endif
 
 if !exists('g:tern_map_prefix')
   let g:tern_map_prefix = '<LocalLeader>'
+endif
+
+if !exists('g:tern_server_timeout')
+  let g:tern_server_timeout = 1
 endif
 
 function! tern#DefaultKeyMap(...)
