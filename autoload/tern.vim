@@ -5,7 +5,7 @@ endif
 
 py << endpy
 
-import vim, os, platform, subprocess, urllib2, webbrowser, json, re, string
+import vim, os, platform, subprocess, urllib2, webbrowser, json, re, string, time
 from functools import cmp_to_key
 from itertools import groupby
 
@@ -20,6 +20,18 @@ def tern_makeRequest(port, doc):
   except urllib2.HTTPError, error:
     tern_displayError(error.read())
     return None
+  
+tern_projects = {}
+
+class Project(object):
+  def __init__(self, dir):
+    self.dir = dir
+    self.port = None
+    self.proc = None
+    self.last_failed = 0
+
+  def __del__(self):
+    tern_killServer(self)
 
 def tern_projectDir():
   cur = vim.eval("b:ternProjectDir")
@@ -44,47 +56,61 @@ def tern_projectDir():
   return projectdir
 
 def tern_findServer(ignorePort=False):
-  cur = int(vim.eval("b:ternPort"))
-  if cur != 0 and cur != ignorePort: return (cur, True)
-
   dir = tern_projectDir()
   if not dir: return (None, False)
+  project = tern_projects.get(dir, None)
+  if project is None:
+    project = Project(dir)
+    tern_projects[dir] = project
+  if project.port is not None and project.port != ignorePort:
+    return (project.port, True)
+
   portFile = os.path.join(dir, ".tern-port")
   if os.path.isfile(portFile):
     port = int(open(portFile, "r").read())
     if port != ignorePort:
-      vim.command("let b:ternPort = " + str(port))
+      project.port = port
       return (port, True)
-  return (tern_startServer(), False)
+  return (tern_startServer(project), False)
 
-def tern_startServer():
+def tern_startServer(project):
+  if time.time() - project.last_failed < 30: return None
+
   win = platform.system() == "Windows"
   env = None
   if platform.system() == "Darwin":
     env = os.environ.copy()
     env["PATH"] += ":/usr/local/bin"
-  proc = subprocess.Popen(vim.eval("g:tern#command"), cwd=tern_projectDir(), env=env,
+  proc = subprocess.Popen(vim.eval("g:tern#command"), cwd=project.dir, env=env,
                           stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=win)
   output = ""
   while True:
     line = proc.stdout.readline()
     if not line:
       tern_displayError("Failed to start server" + (output and ":\n" + output))
+      project.last_failed = time.time()
       return None
     match = re.match("Listening on port (\\d+)", line)
     if match:
       port = int(match.group(1))
-      vim.command("let b:ternPort = " + str(port))
-      vim.command("let b:ternPID = "+str(proc.pid))
+      project.port = port
+      project.proc = proc
       return port
     else:
       output += line
 
-def tern_killServer(ternPID):
-  if platform.system() == "Windows":
-    subprocess.call("taskkill /t /f /pid " + ternPID,shell=True)
-  else:
-    os.kill(int(ternPID), 2)
+def tern_killServer(project):
+  if project.proc is None: return
+  try:
+    project.proc.terminate()
+    project.proc.wait()
+  except:
+    pass
+  project.proc = None
+
+def tern_killServers():
+  for project in tern_projects.values():
+    tern_killServer(project)
 
 def tern_relativeFile():
   filename = vim.eval("expand('%:p')")
@@ -440,7 +466,6 @@ function! tern#Enable()
   if stridx(&buftype, "nofile") > -1 || stridx(&buftype, "nowrite") > -1
     return
   endif
-  let b:ternPort = 0
   let b:ternProjectDir = ''
   let b:ternLastCompletion = []
   let b:ternLastCompletionPos = {'row': -1, 'start': 0, 'end': 0}
@@ -474,7 +499,5 @@ function! tern#Disable()
 endfunction
 
 function! tern#Shutdown()
-  if exists('b:ternPID')
-    python tern_killServer(vim.eval("b:ternPID"))
-  endif
+  py tern_killServers()
 endfunction
