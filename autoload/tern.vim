@@ -81,7 +81,8 @@ def tern_startServer(project):
   if platform.system() == "Darwin":
     env = os.environ.copy()
     env["PATH"] += ":/usr/local/bin"
-  proc = subprocess.Popen(vim.eval("g:tern#command"), cwd=project.dir, env=env,
+  proc = subprocess.Popen(vim.eval("g:tern#command") + vim.eval("g:tern#arguments"),
+                          cwd=project.dir, env=env,
                           stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=win)
   output = ""
   while True:
@@ -377,6 +378,10 @@ endpy
 
 if !exists('g:tern#command')
   let g:tern#command = ["node", expand('<sfile>:h') . '/../node_modules/tern/bin/tern']
+endif
+
+if !exists('g:tern#arguments')
+  let g:tern#arguments = []
 endif
 
 function! tern#PreviewInfo(info)
