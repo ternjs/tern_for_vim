@@ -103,8 +103,11 @@ def tern_startServer(project):
 def tern_killServer(project):
   if project.proc is None: return
   try:
-    project.proc.terminate()
-    project.proc.wait()
+    if platform.system() == "Windows":
+      subprocess.call("taskkill /t /f /pid " + project.proc.pid, shell=True)
+    else:
+      project.proc.terminate()
+      project.proc.wait()
   except:
     pass
   project.proc = None
