@@ -129,3 +129,7 @@ cursor is held still for a period that depends on the |updatetime|
 setting. |'on_move'| can reduce responsiveness on slow systems or big
 codebases. |'on_hold'| probably requires you to set |updatetime| to
 something smaller than the default of 4 seconds.
+
+If you do not see argument hints while in insert mode you might
+have to disable the mode indication (:set noshowmode). For more
+information see |'noshowmode'|.
