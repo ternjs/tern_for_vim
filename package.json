@@ -9,6 +9,6 @@
     "url": "git://github.com/marijnh/tern_for_vim.git"
   },
   "dependencies": {
-    "tern": "0.2"
+    "tern": ">=0.2"
   }
 }
