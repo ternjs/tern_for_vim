@@ -20,8 +20,10 @@ def tern_makeRequest(port, doc):
   except urllib2.HTTPError, error:
     tern_displayError(error.read())
     return None
-  
-tern_projects = {}
+
+# Prefixed with _ to influence destruction order. See
+# http://docs.python.org/2/reference/datamodel.html#object.__del__
+_tern_projects = {}
 
 class Project(object):
   def __init__(self, dir):
@@ -58,10 +60,10 @@ def tern_projectDir():
 def tern_findServer(ignorePort=False):
   dir = tern_projectDir()
   if not dir: return (None, False)
-  project = tern_projects.get(dir, None)
+  project = _tern_projects.get(dir, None)
   if project is None:
     project = Project(dir)
-    tern_projects[dir] = project
+    _tern_projects[dir] = project
   if project.port is not None and project.port != ignorePort:
     return (project.port, True)
 
@@ -113,7 +115,7 @@ def tern_killServer(project):
   project.proc = None
 
 def tern_killServers():
-  for project in tern_projects.values():
+  for project in _tern_projects.values():
     tern_killServer(project)
 
 def tern_relativeFile():
