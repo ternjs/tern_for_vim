@@ -366,9 +366,14 @@ def tern_rename(newName):
   name = data["name"]
   changes, external = ([], [])
   for file, filechanges in changes_byfile:
-    bufnr = int(vim.eval("bufloaded('" + file + "') ? bufnr('" + file + "') : -1"))
-    if bufnr != -1:
-      lines = vim.buffers[bufnr - 1]
+
+    buffer = None
+    for buf in vim.buffers:
+      if buf.name == file:
+        buffer = buf
+
+    if buffer is not None:
+      lines = buffer
     else:
       with open(file, "r") as f:
         lines = f.readlines()
@@ -385,13 +390,13 @@ def tern_rename(newName):
                         "col": colStart + 1 + offset,
                         "filename": file})
       for change in changed:
-        if bufnr != -1:
+        if buffer is not None:
           lines[linenr] = change["text"] = text
         else:
           change["text"] = "[not loaded] " + text
           lines[linenr] = text
       changes.extend(changed)
-    if bufnr == -1:
+    if buffer is None:
       with open(file, "w") as f:
         f.writelines(lines)
       external.append({"name": file, "text": string.join(lines, ""), "type": "full"})
