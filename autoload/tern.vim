@@ -84,7 +84,8 @@ def tern_startServer(project):
     env["PATH"] += ":/usr/local/bin"
   proc = subprocess.Popen(vim.eval("g:tern#command") + vim.eval("g:tern#arguments"),
                           cwd=project.dir, env=env,
-                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=win)
+                          stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                          stderr=subprocess.STDOUT, shell=win)
   output = ""
   while True:
     line = proc.stdout.readline()
