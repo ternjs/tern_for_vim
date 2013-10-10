@@ -104,14 +104,8 @@ def tern_startServer(project):
 
 def tern_killServer(project):
   if project.proc is None: return
-  try:
-    if platform.system() == "Windows":
-      subprocess.call("taskkill /t /f /pid " + str(project.proc.pid), shell=True)
-    else:
-      project.proc.terminate()
-      project.proc.wait()
-  except:
-    pass
+  project.proc.stdin.close()
+  project.proc.wait()
   project.proc = None
 
 def tern_killServers():
@@ -408,7 +402,7 @@ def tern_rename(newName):
 endpy
 
 if !exists('g:tern#command')
-  let g:tern#command = ["node", expand('<sfile>:h') . '/../node_modules/tern/bin/tern']
+  let g:tern#command = ["node", expand('<sfile>:h') . '/../node_modules/tern/bin/tern', '--no-port-file']
 endif
 
 if !exists('g:tern#arguments')
