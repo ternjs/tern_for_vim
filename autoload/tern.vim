@@ -299,7 +299,8 @@ def tern_lookupDefinition(cmd):
       vim.command("normal! m`")
       vim.command("call cursor(" + str(lnum) + "," + str(col) + ")")
     else:
-      vim.command(cmd + " +call\ cursor(" + str(lnum) + "," + str(col) + ") " + tern_projectFilePath(filename))
+      vim.command(cmd + " +call\ cursor(" + str(lnum) + "," + str(col) + ") " +
+        json.dumps(tern_projectFilePath(filename)))
   elif "url" in data:
     vim.command("echo " + json.dumps("see " + data["url"]))
   else:
