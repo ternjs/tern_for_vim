@@ -8,6 +8,9 @@ py << endpy
 import vim, os, platform, subprocess, urllib2, webbrowser, json, re, string, time
 from itertools import groupby
 
+opener = urllib2.build_opener(urllib2.ProxyHandler({}))
+urllib2.install_opener(opener)
+
 def tern_displayError(err):
   vim.command("echo " + json.dumps(str(err)))
 
