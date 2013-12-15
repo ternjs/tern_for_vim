@@ -9,14 +9,13 @@ import vim, os, platform, subprocess, urllib2, webbrowser, json, re, string, tim
 from itertools import groupby
 
 opener = urllib2.build_opener(urllib2.ProxyHandler({}))
-urllib2.install_opener(opener)
 
 def tern_displayError(err):
   vim.command("echo " + json.dumps(str(err)))
 
 def tern_makeRequest(port, doc):
   try:
-    req = urllib2.urlopen("http://localhost:" + str(port) + "/", json.dumps(doc),
+    req = opener.open("http://localhost:" + str(port) + "/", json.dumps(doc),
                           float(vim.eval("g:tern_request_timeout")));
     return json.loads(req.read())
   except urllib2.HTTPError, error:
