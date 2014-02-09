@@ -213,7 +213,7 @@ def tern_sendBufferIfDirty():
 
 def tern_asCompletionIcon(type):
   if type is None or type == "?": return "(?)"
-  if type.startswith("fn("): return "(fn)"
+  if type.startswith("fn("): return type
   if type.startswith("["): return "([])"
   if type == "number": return "(num)"
   if type == "string": return "(str)"
