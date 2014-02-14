@@ -119,6 +119,7 @@ OPTIONS                                                           *tern-options*
 The following options are available:
 
     |tern_show_argument_hints|....... Configure argument hints display.
+    |tern_show_signature_in_pum|..... Configure completion menu display.
 
 -------------------------------------------------------------------------------
                                                       *tern_show_argument_hints*
@@ -133,3 +134,10 @@ something smaller than the default of 4 seconds.
 If you do not see argument hints while in insert mode you might
 have to disable the mode indication (:set noshowmode). For more
 information see |'noshowmode'|.
+
+-------------------------------------------------------------------------------
+                                                    *tern_show_signature_in_pum*
+
+Defaults to 0. Can be set to 1 to display function signatures in the completion
+menu. Function signatures include parameter names, their type, and whether the
+parameter is optional.

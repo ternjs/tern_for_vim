@@ -213,7 +213,11 @@ def tern_sendBufferIfDirty():
 
 def tern_asCompletionIcon(type):
   if type is None or type == "?": return "(?)"
-  if type.startswith("fn("): return type
+  if type.startswith("fn("):
+    if vim.eval("g:tern_show_signature_in_pum") == "0":
+      return "(fn)"
+    else:
+      return type
   if type.startswith("["): return "([])"
   if type == "number": return "(num)"
   if type == "string": return "(str)"
@@ -468,6 +472,10 @@ command! TernRename exe 'py tern_rename("'.input("new name? ",expand("<cword>"))
 
 if !exists('g:tern_show_argument_hints')
   let g:tern_show_argument_hints = 'no'
+endif
+
+if !exists('g:tern_show_signature_in_pum')
+  let g:tern_show_signature_in_pum = 0
 endif
 
 if !exists('g:tern_map_keys')
