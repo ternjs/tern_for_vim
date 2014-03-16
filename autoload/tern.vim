@@ -507,7 +507,9 @@ function! tern#Enable()
   if stridx(&buftype, "nofile") > -1 || stridx(&buftype, "nowrite") > -1
     return
   endif
-  let b:ternProjectDir = ''
+  if !exists("b:ternProjectDir")
+    let b:ternProjectDir = ''
+  endif
   let b:ternLastCompletion = []
   let b:ternLastCompletionPos = {'row': -1, 'start': 0, 'end': 0}
   let b:ternBufferSentAt = -1
