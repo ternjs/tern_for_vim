@@ -223,7 +223,7 @@ def tern_ensureCompletionCached():
   curLine = vim.current.buffer[curRow - 1]
 
   if (curRow == int(cached["row"]) and curCol >= int(cached["end"]) and
-      curLine[int(cached["start"]):int(cached["end"])] == cached["word"] and
+      curLine[0:int(cached["end"])] == cached["word"] and
       (not re.match(".*\\W", curLine[int(cached["end"]):curCol]))):
     return
 
@@ -242,7 +242,7 @@ def tern_ensureCompletionCached():
     "row": curRow,
     "start": start,
     "end": end,
-    "word": curLine[start:end]
+    "word": curLine[0:end]
   }))
 
 def tern_typeDoc(rec):
