@@ -108,7 +108,7 @@ def tern_killServers():
     tern_killServer(project)
 
 def tern_relativeFile():
-  filename = vim.eval("expand('%:p')")
+  filename = vim.eval("expand('%:p')").decode('utf-8')
   return filename[len(tern_projectDir()) + 1:]
 
 def tern_bufferSlice(buf, pos, end):
@@ -299,7 +299,7 @@ def tern_lookupDefinition(cmd):
       vim.command("call cursor(" + str(lnum) + "," + str(col) + ")")
     else:
       vim.command(cmd + " +call\ cursor(" + str(lnum) + "," + str(col) + ") " +
-        tern_projectFilePath(filename).replace(" ", "\\ "))
+        tern_projectFilePath(filename).replace(u" ", u"\\ "))
   elif "url" in data:
     vim.command("echo " + json.dumps("see " + data["url"]))
   else:
