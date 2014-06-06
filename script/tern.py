@@ -9,7 +9,7 @@ def tern_displayError(err):
 def tern_makeRequest(port, doc):
   try:
     req = opener.open("http://localhost:" + str(port) + "/", json.dumps(doc),
-                          float(vim.eval("g:tern_request_timeout")));
+                      float(vim.eval("g:tern_request_timeout")))
     return json.loads(req.read())
   except urllib2.HTTPError, error:
     tern_displayError(error.read())
