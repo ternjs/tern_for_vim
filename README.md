@@ -31,6 +31,10 @@ sure you have [node.js][node] and [npm][npm] installed (Tern is a
 JavaScript program), and install the tern server by running `npm
 install` in the `bundle/tern_for_vim` directory.
 
+__Caution__:
+Because the node process is not run using your standard shell, the NVM version of node.js won't work.
+You need a global node executable.
+
 ## Configuration
 
 The command used to start the Tern server can be overridden by setting
