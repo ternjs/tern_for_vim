@@ -5,7 +5,7 @@ endif
 
 let s:plug = expand("<sfile>:p:h:h")
 let s:script = s:plug . '/script/tern.py'
-execute 'pyfile ' . s:script
+execute 'pyfile ' . fnameescape(s:script)
 
 if !exists('g:tern#command')
   let g:tern#command = ["node", expand('<sfile>:h') . '/../node_modules/tern/bin/tern', '--no-port-file']
