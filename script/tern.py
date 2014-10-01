@@ -77,10 +77,15 @@ def tern_startServer(project):
   if platform.system() == "Darwin":
     env = os.environ.copy()
     env["PATH"] += ":/usr/local/bin"
-  proc = subprocess.Popen(vim.eval("g:tern#command") + vim.eval("g:tern#arguments"),
-                          cwd=project.dir, env=env,
-                          stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                          stderr=subprocess.STDOUT, shell=win)
+  command = ["UU"] + vim.eval("g:tern#command") + vim.eval("g:tern#arguments")
+  try:
+    proc = subprocess.Popen(command,
+                            cwd=project.dir, env=env,
+                            stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                            stderr=subprocess.STDOUT, shell=win)
+  except Exception as e:
+    tern_displayError("Failed to start server: " + str(e))
+    return None
   output = ""
   while True:
     line = proc.stdout.readline()
