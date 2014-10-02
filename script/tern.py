@@ -77,7 +77,7 @@ def tern_startServer(project):
   if platform.system() == "Darwin":
     env = os.environ.copy()
     env["PATH"] += ":/usr/local/bin"
-  command = ["UU"] + vim.eval("g:tern#command") + vim.eval("g:tern#arguments")
+  command = vim.eval("g:tern#command") + vim.eval("g:tern#arguments")
   try:
     proc = subprocess.Popen(command,
                             cwd=project.dir, env=env,
