@@ -253,8 +253,8 @@ def tern_sendBufferIfDirty():
     if (vim.eval("exists('b:ternInsertActive')") == "1" and
             vim.eval("b:ternInsertActive") == "0"):
         curSeq = vim.eval("undotree()['seq_cur']")
-    if curSeq > vim.eval("b:ternBufferSentAt") and tern_sendBuffer():
-        vim.command("let b:ternBufferSentAt = " + str(curSeq))
+        if curSeq > vim.eval("b:ternBufferSentAt") and tern_sendBuffer():
+            vim.command("let b:ternBufferSentAt = " + str(curSeq))
 
 def tern_asCompletionIcon(type):
     if type is None or type == "?":
