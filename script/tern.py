@@ -289,7 +289,15 @@ def tern_lookupDocumentation(browse=False):
   doc = data.get("doc")
   url = data.get("url")
   if url:
-    if browse: return webbrowser.open(url)
+    if browse: 
+      savout = os.dup(1)
+      os.close(1)
+      os.open(os.devnull, os.O_RDWR)
+      try:
+        result = webbrowser.open(url)
+      finally:
+        os.dup2(savout, 1)
+        return result
     doc = ((doc and doc + "\n\n") or "") + "See " + url
   if doc:
     vim.command("call tern#PreviewInfo(" + json.dumps(doc) + ")")
