@@ -24,13 +24,41 @@ cursor.
 `TernRename`: Rename the variable under the cursor.
 
 ## Installation
-
+####Manual
 If you use [Pathogen][path] or something similar, you can clone this
 repository to your `~/.vim/bundle` (or equivalent) directory. Make
 sure you have [node.js][node] and [npm][npm] installed (Tern is a
 JavaScript program), and install the tern server by running `npm
 install` in the `bundle/tern_for_vim` directory.
+####apt-vim
+Run the following in terminal:
+```json
+apt-vim install -jy
+{
+    "depends-on": [
+        {
+            "name": "node",
+            "recipe": {
+                "darwin": [
+                    "brew install node"
+                ],
+                "linux": [
+                    "sudo apt-get install -y node npm"
+                ]
+            }
+        }
+    ],
+    "name": "tern_for_vim",
+    "pkg-url": "https://github.com/marijnh/tern_for_vim.git",
+    "recipe": {
+        "all": [
+            "npm install"
+        ]
+    }
+}
 
+
+```
 __Caution__:
 Because the node process is not run using your standard shell, the NVM version of node.js won't work.
 You need a global node executable.
