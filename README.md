@@ -25,6 +25,8 @@ cursor.
 
 ## Installation
 
+#### Manual
+
 If you use [Pathogen][path] or something similar, you can clone this
 repository to your `~/.vim/bundle` (or equivalent) directory. Make
 sure you have [node.js][node] and [npm][npm] installed (Tern is a
@@ -34,6 +36,14 @@ install` in the `bundle/tern_for_vim` directory.
 __Caution__:
 Because the node process is not run using your standard shell, the NVM version of node.js won't work.
 You need a global node executable.
+
+#### apt-vim
+
+Install [apt-vim](https://github.com/egalpin/apt-vim) and then run the
+following in terminal:
+
+`apt-vim install -y https://github.com/marijnh/tern_for_vim.git`
+
 
 ## Configuration
 

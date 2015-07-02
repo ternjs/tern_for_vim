@@ -1,0 +1,32 @@
+@vimpkg
+{
+    "depends-on": [
+        {
+            "name": "brew",
+            "recipe": {
+                "darwin": [
+                    "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+                ],
+                "all": []
+            }
+        },
+        {
+            "name": "node",
+            "recipe": {
+                "darwin": [
+                    "brew install node"
+                ],
+                "linux": [
+                    "sudo apt-get install -y node npm"
+                ]
+            }
+        }
+    ],
+    "name": "tern_for_vim",
+    "pkg-url": "https://github.com/marijnh/tern_for_vim.git",
+    "recipe": {
+        "all": [
+            "npm install"
+        ]
+    }
+}
