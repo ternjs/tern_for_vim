@@ -21,7 +21,7 @@ from itertools import groupby
 opener = request.build_opener(request.ProxyHandler({}))
 
 def tern_displayError(err):
-  vim.command("echo " + json.dumps(str(err)))
+  print(str(err))
 
 def tern_makeRequest(port, doc):
   payload = json.dumps(doc)
@@ -302,7 +302,7 @@ def tern_lookupDocumentation(browse=False):
   if doc:
     vim.command("call tern#PreviewInfo(" + json.dumps(doc) + ")")
   else:
-    vim.command("echo 'no documentation found'")
+    print("no documentation found")
 
 def tern_echoWrap(data, name=""):
   text = data
@@ -311,7 +311,7 @@ def tern_echoWrap(data, name=""):
   col = int(vim.eval("&columns"))-23
   if len(text) > col:
     text = text[0:col]+"..."
-  vim.command("echo '{0}'".format(text.encode('utf-8')))
+  print(text.encode('utf-8'))
 
 def tern_lookupType():
   data = tern_runCommand("type")
@@ -339,9 +339,9 @@ def tern_lookupDefinition(cmd):
       vim.command(cmd + " +call\ cursor(" + str(lnum) + "," + str(col) + ") " +
         tern_projectFilePath(filename).replace(u" ", u"\\ "))
   elif "url" in data:
-    vim.command("echo " + json.dumps("see " + data["url"]))
+    print("see " + data["url"])
   else:
-    vim.command("echo 'no definition found'")
+    print("no definition found")
 
 def tern_projectFilePath(path):
   return os.path.join(tern_projectDir(), path)
