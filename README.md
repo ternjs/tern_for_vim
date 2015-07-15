@@ -35,7 +35,7 @@ __Caution__:
 Because the node process is not run using your standard shell, the NVM version of node.js won't work.
 You need a global node executable.
 ####apt-vim
-Run the following in terminal:
+Install [apt-vim](https://github.com/egalpin/apt-vim) and then run the following in terminal:
 
 `apt-vim install -y https://github.com/marijnh/tern_for_vim.git`
 
