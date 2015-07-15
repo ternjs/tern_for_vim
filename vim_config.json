@@ -2,6 +2,15 @@
 {
     "depends-on": [
         {
+            "name": "brew",
+            "recipe": {
+                "darwin": [
+                    "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+                ],
+                "all": []
+            }
+        },
+        {
             "name": "node",
             "recipe": {
                 "darwin": [
