@@ -36,33 +36,8 @@ Because the node process is not run using your standard shell, the NVM version o
 You need a global node executable.
 ####apt-vim
 Run the following in terminal:
-```json
-apt-vim install -jy
-{
-    "depends-on": [
-        {
-            "name": "node",
-            "recipe": {
-                "darwin": [
-                    "brew install node"
-                ],
-                "linux": [
-                    "sudo apt-get install -y node npm"
-                ]
-            }
-        }
-    ],
-    "name": "tern_for_vim",
-    "pkg-url": "https://github.com/marijnh/tern_for_vim.git",
-    "recipe": {
-        "all": [
-            "npm install"
-        ]
-    }
-}
 
-
-```
+`apt-vim install -y https://github.com/marijnh/tern_for_vim.git`
 
 
 ## Configuration
