@@ -13,7 +13,7 @@
             }
         }
     ],
-    "name": "tern_for_vim",
+    "name": "tfv",
     "pkg-url": "https://github.com/marijnh/tern_for_vim.git",
     "recipe": {
         "all": [
