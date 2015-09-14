@@ -58,6 +58,7 @@ def tern_projectDir():
 
   projectdir = ""
   mydir = vim.eval("expand('%:p:h')")
+  mydir = mydir.decode(vim.eval('&encoding'))
   if not os.path.isdir(mydir): return ""
 
   if mydir:
@@ -138,7 +139,7 @@ def tern_killServers():
 def tern_relativeFile():
   filename = vim.eval("expand('%:p')")
   if PY2:
-    filename = filename.decode('utf-8')
+    filename = filename.decode(vim.eval('&encoding'))
   return filename[len(tern_projectDir()) + 1:]
 
 def tern_bufferSlice(buf, pos, end):
