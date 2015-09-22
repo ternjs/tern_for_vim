@@ -58,7 +58,8 @@ def tern_projectDir():
 
   projectdir = ""
   mydir = vim.eval("expand('%:p:h')")
-  mydir = mydir.decode(vim.eval('&encoding'))
+  if PY2:
+    mydir = mydir.decode(vim.eval('&encoding'))
   if not os.path.isdir(mydir): return ""
 
   if mydir:
