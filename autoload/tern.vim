@@ -69,12 +69,6 @@ function! tern#LookupArgumentHints()
     elseif has('python3')
       python3 tern_lookupArgumentHints(vim.eval('fname'),int(vim.eval('pos')))
     endif
-  else
-    if has('python')
-      python tern_lookupType()
-    elseif has('python3')
-      python3 tern_lookupType()
-    endif
   endif
   return ''
 endfunction
