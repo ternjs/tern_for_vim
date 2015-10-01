@@ -216,7 +216,7 @@ def tern_runCommand(query, pos=None, fragments=True, silent=False):
       if data is None: return None
     except Exception as e:
       if not silent:
-        tern_displayError(e + str(silent))
+        tern_displayError(e)
 
   if sendingFile and vim.eval("b:ternInsertActive") == "0":
     vim.command("let b:ternBufferSentAt = " + str(curSeq))
