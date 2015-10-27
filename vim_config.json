@@ -23,7 +23,7 @@
         }
     ],
     "name": "tern_for_vim",
-    "pkg-url": "https://github.com/marijnh/tern_for_vim.git",
+    "pkg-url": "https://github.com/ternjs/tern_for_vim.git",
     "recipe": {
         "all": [
             "npm install"

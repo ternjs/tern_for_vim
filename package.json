@@ -6,7 +6,7 @@
   "description": "Sublime Text package for Vim",
   "repository": {
     "type": "git",
-    "url": "git://github.com/marijnh/tern_for_vim.git"
+    "url": "git://github.com/ternjs/tern_for_vim.git"
   },
   "dependencies": {
     "tern": ">=0.5"

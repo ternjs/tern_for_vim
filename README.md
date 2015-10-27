@@ -42,7 +42,7 @@ You need a global node executable.
 Install [apt-vim](https://github.com/egalpin/apt-vim) and then run the
 following in terminal:
 
-`apt-vim install -y https://github.com/marijnh/tern_for_vim.git`
+`apt-vim install -y https://github.com/ternjs/tern_for_vim.git`
 
 
 ## Configuration
