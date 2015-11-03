@@ -19,6 +19,13 @@ if !exists('g:tern#arguments')
   let g:tern#arguments = []
 endif
 
+function tern#MkProj()
+    let src = s:plug . '/tern-project.sample'
+    let dest = getcwd() . '/.tern-project'
+    call writefile(readfile(src), dest)
+    echom 'tern project file written to: ' . dest
+endfunction
+
 function! tern#PreviewInfo(info)
   pclose
   new +setlocal\ previewwindow|setlocal\ buftype=nofile|setlocal\ noswapfile|setlocal\ wrap
@@ -94,6 +101,8 @@ elseif has('python3')
   command! TernRefs py3 tern_refs()
   command! TernRename exe 'py3 tern_rename("'.input("new name? ",expand("<cword>")).'")'
 endif
+
+command! TernMkProj call tern#MkProj()
 
 if !exists('g:tern_show_argument_hints')
   let g:tern_show_argument_hints = 'no'
