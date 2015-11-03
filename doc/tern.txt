@@ -75,6 +75,7 @@ The following commands are available:
     |TernDefTab|.................... Look up definition in new tab
     |TernRefs|...................... Look up references
     |TernRename|.................... Rename identifier
+    |TernMkProj|.................... Place a .tern-project under cwd
 
 ------------------------------------------------------------------------------
                                                                        *TernDoc*
