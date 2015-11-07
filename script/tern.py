@@ -189,6 +189,13 @@ def tern_runCommand(query, pos=None, fragments=True, silent=False):
   doc = {"query": query, "files": []}
   if curSeq == vim.eval("b:ternBufferSentAt"):
     fname, sendingFile = (tern_relativeFile(), False)
+  elif not int(vim.eval('&modified')):
+    fname, sendingFile = (tern_relativeFile(), False)
+    doc["files"].append({
+      "type": "delete",
+      "name": fname
+    })
+    vim.command("let b:ternBufferSentAt = " + str(curSeq))
   elif len(vim.current.buffer) > 250 and fragments:
     f = tern_bufferFragment()
     doc["files"].append(f)
