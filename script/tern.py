@@ -329,7 +329,7 @@ def tern_lookupArgumentHints(fname, apos):
   if data: tern_echoWrap(data.get("type", ""),name=fname)
 
 def tern_lookupDefinition(cmd):
-  data = tern_runCommand("definition")
+  data = tern_runCommand("definition", fragments=False)
   if data is None: return
 
   if "file" in data:
