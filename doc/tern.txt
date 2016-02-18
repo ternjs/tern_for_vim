@@ -34,7 +34,7 @@ USAGE                                                               *tern-usage*
 
 After installation vim will use the tern supplied omnifunc to handle
 omnicomplete calls for javascript files. In order to set up tern for
-use with your project you should create a '.tern-project' file in the root
+use with your project you should create a ".tern-project" file in the root
 directory of your project. The following is just an example:
 >
     {
@@ -55,7 +55,7 @@ directory of your project. The following is just an example:
 >
 
 This will tell the tern server to load definitions for jquery and the
-browser environment. Furthermore it will parse 'importantfile.js' on start up
+browser environment. Furthermore it will parse "importantfile.js" on start up
 and register the requirejs plugin.
 
 For more detailed description of this configuration please refer to the online
@@ -66,51 +66,51 @@ COMMANDS                                                         *tern-commands*
 
 The following commands are available:
 
-    |TernDoc|....................... Look up Documentation
-    |TernDocBrowse|................. Browse the Documentation
-    |TernType|...................... Perform a type look up
-    |TernDef|....................... Look up definition
-    |TernDefPreview|................ Look up definition in preview
-    |TernDefSplit|.................. Look up definition in new split
-    |TernDefTab|.................... Look up definition in new tab
-    |TernRefs|...................... Look up references
-    |TernRename|.................... Rename identifier
+    |:TernDoc|...................... Look up Documentation
+    |:TernDocBrowse|................ Browse the Documentation
+    |:TernType|..................... Perform a type look up
+    |:TernDef|...................... Look up definition
+    |:TernDefPreview|............... Look up definition in preview
+    |:TernDefSplit|................. Look up definition in new split
+    |:TernDefTab|................... Look up definition in new tab
+    |:TernRefs|..................... Look up references
+    |:TernRename|................... Rename identifier
 
 ------------------------------------------------------------------------------
-                                                                       *TernDoc*
+                                                                      *:TernDoc*
 Look up the documentation of something.
 
 ------------------------------------------------------------------------------
-                                                                 *TernDocBrowse*
+                                                                *:TernDocBrowse*
 Open the documentation in an external browser.
 
 ------------------------------------------------------------------------------
-                                                                      *TernType*
+                                                                     *:TernType*
 Find the type of the identifier under the cursor.
 
 ------------------------------------------------------------------------------
-                                                                       *TernDef*
+                                                                      *:TernDef*
 Jump to the definition of the identifier under the cursor.
 
 ------------------------------------------------------------------------------
-                                                                *TernDefPreview*
+                                                               *:TernDefPreview*
 Jump to the definition of the identifier under the cursor inside
 the preview window.
 
 ------------------------------------------------------------------------------
-                                                                  *TernDefSplit*
+                                                                 *:TernDefSplit*
 Jump to the definition of the identifier under the cursor in a new split.
 
 ------------------------------------------------------------------------------
-                                                                    *TernDefTab*
+                                                                   *:TernDefTab*
 Jump to the definition of the identifier under the cursor in a new tab.
 
 ------------------------------------------------------------------------------
-                                                                      *TernRefs*
+                                                                     *:TernRefs*
 List all references of the identifier under the cursor.
 
 ------------------------------------------------------------------------------
-                                                                    *TernRename*
+                                                                   *:TernRename*
 Rename the variable under the cursor.
 
 ==============================================================================
@@ -130,15 +130,15 @@ Defaults to 0. Can be set to 1 to enable the following key mappings. By default
 these mappings are prefixed with |<LocalLeader>|. You can change this prefix
 with |tern_map_prefix| option.
 
-    *<LocalLeader>tD*   |TernDoc|
-    *<LocalLeader>tb*   |TernDocBrowse|
-    *<LocalLeader>tt*   |TernType|
-    *<LocalLeader>td*   |TernDef|
-    *<LocalLeader>tpd*  |TernDefPreview|
-    *<LocalLeader>tsd*  |TernDefSplit|
-    *<LocalLeader>ttd*  |TernDefTab|
-    *<LocalLeader>tr*   |TernRefs|
-    *<LocalLeader>tR*   |TernRename|
+    *<LocalLeader>tD*   |:TernDoc|
+    *<LocalLeader>tb*   |:TernDocBrowse|
+    *<LocalLeader>tt*   |:TernType|
+    *<LocalLeader>td*   |:TernDef|
+    *<LocalLeader>tpd*  |:TernDefPreview|
+    *<LocalLeader>tsd*  |:TernDefSplit|
+    *<LocalLeader>ttd*  |:TernDefTab|
+    *<LocalLeader>tr*   |:TernRefs|
+    *<LocalLeader>tR*   |:TernRename|
 
 -------------------------------------------------------------------------------
                                                                *tern_map_prefix*
@@ -149,16 +149,16 @@ key mappings.
 -------------------------------------------------------------------------------
                                                       *tern_show_argument_hints*
 
-Defaults to |'no'|. Can be set to |'on_move'| to update the argument
-hints whenever the cursor moves, or |'on_hold'| to do it whenever the
-cursor is held still for a period that depends on the |updatetime|
-setting. |'on_move'| can reduce responsiveness on slow systems or big
-codebases. |'on_hold'| probably requires you to set |updatetime| to
+Defaults to "no". Can be set to "on_move" to update the argument
+hints whenever the cursor moves, or "on_hold" to do it whenever the
+cursor is held still for a period that depends on the 'updatetime'
+setting. "on_move" can reduce responsiveness on slow systems or big
+codebases. "on_hold" probably requires you to set 'updatetime' to
 something smaller than the default of 4 seconds.
 
 If you do not see argument hints while in insert mode you might
 have to disable the mode indication (:set noshowmode). For more
-information see |'noshowmode'|.
+information see 'noshowmode'.
 
 -------------------------------------------------------------------------------
                                                     *tern_show_signature_in_pum*
