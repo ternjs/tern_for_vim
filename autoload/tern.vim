@@ -121,7 +121,7 @@ endif
 
 function! tern#DefaultKeyMap(...)
   let prefix = len(a:000)==1 ? a:1 : "<LocalLeader>"
-  execute 'nnoremap <buffer> '.prefix.'td' ':TernDoc<CR>'
+  execute 'nnoremap <buffer> '.prefix.'tD' ':TernDoc<CR>'
   execute 'nnoremap <buffer> '.prefix.'tb' ':TernDocBrowse<CR>'
   execute 'nnoremap <buffer> '.prefix.'tt' ':TernType<CR>'
   execute 'nnoremap <buffer> '.prefix.'td' ':TernDef<CR>'
