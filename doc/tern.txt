@@ -19,7 +19,7 @@ intelligent renaming.
 ==============================================================================
 INSTALLATION                                                      *tern-install*
 
-Install the plugin using your prefered plugin manager or copy the files
+Install the plugin using your preferred plugin manager or copy the files
 to your ~/.vim directory manually. Make sure you have npm and node installed
 and run the following from the root path of the plugin (the same directory
 in which the file package.json is located): >
