@@ -118,8 +118,33 @@ OPTIONS                                                           *tern-options*
 
 The following options are available:
 
+    |tern_map_keys|.................. Enable or disable default key mappings.
+    |tern_map_prefix|................ Configure mapping prefix.
     |tern_show_argument_hints|....... Configure argument hints display.
     |tern_show_signature_in_pum|..... Configure completion menu display.
+
+-------------------------------------------------------------------------------
+                                                                 *tern_map_keys*
+
+Defaults to 0. Can be set to 1 to enable the following key mappings. By default
+these mappings are prefixed with |<LocalLeader>|. You can change this prefix
+with |tern_map_prefix| option.
+
+    *<LocalLeader>tD*   |TernDoc|
+    *<LocalLeader>tb*   |TernDocBrowse|
+    *<LocalLeader>tt*   |TernType|
+    *<LocalLeader>td*   |TernDef|
+    *<LocalLeader>tpd*  |TernDefPreview|
+    *<LocalLeader>tsd*  |TernDefSplit|
+    *<LocalLeader>ttd*  |TernDefTab|
+    *<LocalLeader>tr*   |TernRefs|
+    *<LocalLeader>tR*   |TernRename|
+
+-------------------------------------------------------------------------------
+                                                               *tern_map_prefix*
+
+Defaults to |<LocalLeader>|. Specifies prefix which is used to define default
+key mappings.
 
 -------------------------------------------------------------------------------
                                                       *tern_show_argument_hints*
