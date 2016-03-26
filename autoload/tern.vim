@@ -104,7 +104,7 @@ if !exists('g:tern_show_signature_in_pum')
 endif
 
 if !exists('g:tern_set_omni_function')
-  let g:tern_show_signature_in_pum = 1
+  let g:tern_set_omni_function = 1
 endif
 
 if !exists('g:tern_map_keys')
