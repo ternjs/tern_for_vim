@@ -103,6 +103,10 @@ if !exists('g:tern_show_signature_in_pum')
   let g:tern_show_signature_in_pum = 0
 endif
 
+if !exists('g:tern_set_omni_function')
+  let g:tern_show_signature_in_pum = 1
+endif
+
 if !exists('g:tern_map_keys')
   let g:tern_map_keys = 0
 endif
@@ -137,7 +141,9 @@ function! tern#Enable()
   let b:ternLastCompletionPos = {'row': -1, 'start': 0, 'end': 0}
   let b:ternBufferSentAt = undotree()['seq_cur']
   let b:ternInsertActive = 0
-  setlocal omnifunc=tern#Complete
+  if g:tern_set_omni_function
+    setlocal omnifunc=tern#Complete
+  endif
   if g:tern_map_keys
     call tern#DefaultKeyMap(g:tern_map_prefix)
   endif
