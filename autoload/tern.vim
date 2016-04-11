@@ -5,10 +5,10 @@ endif
 
 let s:plug = expand("<sfile>:p:h:h")
 let s:script = s:plug . '/script/tern.py'
-if has('python')
-  execute 'pyfile ' . fnameescape(s:script)
-elseif has('python3')
+if has('python3')
   execute 'py3file ' . fnameescape(s:script)
+elseif has('python')
+  execute 'pyfile ' . fnameescape(s:script)
 endif
 
 if !exists('g:tern#command')
