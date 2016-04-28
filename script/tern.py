@@ -293,7 +293,7 @@ def tern_lookupDocumentation(browse=False):
   doc = data.get("doc")
   url = data.get("url")
   if url:
-    if browse: 
+    if browse:
       savout = os.dup(1)
       os.close(1)
       os.open(os.devnull, os.O_RDWR)
@@ -342,7 +342,7 @@ def tern_lookupDefinition(cmd):
       vim.command("call cursor(" + str(lnum) + "," + str(col) + ")")
     else:
       vim.command(cmd + " +call\ cursor(" + str(lnum) + "," + str(col) + ") " +
-        tern_projectFilePath(filename).replace(u" ", u"\\ "))
+        tern_projectFilePath(filename).replace(" ", "\\ "))
   elif "url" in data:
     print("see " + data["url"])
   else:
