@@ -139,7 +139,9 @@ function! tern#Enable()
   let b:ternProjectDir = ''
   let b:ternLastCompletion = []
   let b:ternLastCompletionPos = {'row': -1, 'start': 0, 'end': 0}
-  let b:ternBufferSentAt = undotree()['seq_cur']
+  if !exists('b:ternBufferSentAt')
+    let b:ternBufferSentAt = undotree()['seq_cur']
+  endif
   let b:ternInsertActive = 0
   if g:tern_set_omni_function
     setlocal omnifunc=tern#Complete
