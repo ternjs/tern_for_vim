@@ -265,9 +265,11 @@ def tern_ensureCompletionCached():
                          {"line": curRow - 1, "ch": curCol})
   if data is None: return
 
+  ignorecase = vim.eval("g:tern_ignorecase")
   completions = []
   for rec in data["completions"]:
     completions.append({"word": rec["name"],
+                        "icase": ignorecase,
                         "menu": tern_asCompletionIcon(rec.get("type")),
                         "info": tern_typeDoc(rec) })
   vim.command("let b:ternLastCompletion = " + json.dumps(completions))
