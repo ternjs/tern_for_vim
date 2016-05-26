@@ -118,10 +118,18 @@ OPTIONS                                                           *tern-options*
 
 The following options are available:
 
+    |tern_ignorecase|................ Configure case sensitivity.
     |tern_map_keys|.................. Enable or disable default key mappings.
     |tern_map_prefix|................ Configure mapping prefix.
     |tern_show_argument_hints|....... Configure argument hints display.
     |tern_show_signature_in_pum|..... Configure completion menu display.
+
+-------------------------------------------------------------------------------
+                                                               *tern_ignorecase*
+
+Defaults to 0. It means someone should keep typing characters as is to keep
+suggestions. When set to non-zero case is to be ignored when comparing items to
+be equal.
 
 -------------------------------------------------------------------------------
                                                                  *tern_map_keys*
