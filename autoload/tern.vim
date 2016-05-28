@@ -74,25 +74,25 @@ function! tern#LookupArgumentHints()
 endfunction
 
 if has('python3')
-  command! TernDoc py3 tern_lookupDocumentation()
-  command! TernDocBrowse py3 tern_lookupDocumentation(browse=True)
-  command! TernType py3 tern_lookupType()
-  command! TernDef py3 tern_lookupDefinition("edit")
-  command! TernDefPreview py3 tern_lookupDefinition("pedit")
-  command! TernDefSplit py3 tern_lookupDefinition("split")
-  command! TernDefTab py3 tern_lookupDefinition("tabe")
-  command! TernRefs py3 tern_refs()
-  command! TernRename exe 'py3 tern_rename("'.input("new name? ",expand("<cword>")).'")'
+  command! -buffer TernDoc py3 tern_lookupDocumentation()
+  command! -buffer TernDocBrowse py3 tern_lookupDocumentation(browse=True)
+  command! -buffer TernType py3 tern_lookupType()
+  command! -buffer TernDef py3 tern_lookupDefinition("edit")
+  command! -buffer TernDefPreview py3 tern_lookupDefinition("pedit")
+  command! -buffer TernDefSplit py3 tern_lookupDefinition("split")
+  command! -buffer TernDefTab py3 tern_lookupDefinition("tabe")
+  command! -buffer TernRefs py3 tern_refs()
+  command! -buffer TernRename exe 'py3 tern_rename("'.input("new name? ",expand("<cword>")).'")'
 elseif has('python')
-  command! TernDoc py tern_lookupDocumentation()
-  command! TernDocBrowse py tern_lookupDocumentation(browse=True)
-  command! TernType py tern_lookupType()
-  command! TernDef py tern_lookupDefinition("edit")
-  command! TernDefPreview py tern_lookupDefinition("pedit")
-  command! TernDefSplit py tern_lookupDefinition("split")
-  command! TernDefTab py tern_lookupDefinition("tabe")
-  command! TernRefs py tern_refs()
-  command! TernRename exe 'py tern_rename("'.input("new name? ",expand("<cword>")).'")'
+  command! -buffer TernDoc py tern_lookupDocumentation()
+  command! -buffer TernDocBrowse py tern_lookupDocumentation(browse=True)
+  command! -buffer TernType py tern_lookupType()
+  command! -buffer TernDef py tern_lookupDefinition("edit")
+  command! -buffer TernDefPreview py tern_lookupDefinition("pedit")
+  command! -buffer TernDefSplit py tern_lookupDefinition("split")
+  command! -buffer TernDefTab py tern_lookupDefinition("tabe")
+  command! -buffer TernRefs py tern_refs()
+  command! -buffer TernRename exe 'py tern_rename("'.input("new name? ",expand("<cword>")).'")'
 endif
 
 if !exists('g:tern_show_argument_hints')
