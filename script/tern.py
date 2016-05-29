@@ -255,17 +255,18 @@ def tern_ensureCompletionCached():
   cached = vim.eval("b:ternLastCompletionPos")
   curRow, curCol = vim.current.window.cursor
   curLine = vim.current.buffer[curRow - 1]
+  ignorecase = int(vim.eval("g:tern_ignorecase"))
+  pattern = (".*(?:\\w|\\W)" if bool(ignorecase) else ".*\\W")
 
   if (curRow == int(cached["row"]) and curCol >= int(cached["end"]) and
       curLine[0:int(cached["end"])] == cached["word"] and
-      (not re.match(".*\\W", curLine[int(cached["end"]):curCol]))):
+      (not re.match(pattern, curLine[int(cached["end"]):curCol]))):
     return
 
-  data = tern_runCommand({"type": "completions", "types": True, "docs": True},
+  data = tern_runCommand({"type": "completions", "types": True, "docs": True, "caseInsensitive": bool(ignorecase)},
                          {"line": curRow - 1, "ch": curCol})
   if data is None: return
 
-  ignorecase = vim.eval("g:tern_ignorecase")
   completions = []
   for rec in data["completions"]:
     completions.append({"word": rec["name"],
