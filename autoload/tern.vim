@@ -73,28 +73,6 @@ function! tern#LookupArgumentHints()
   return ''
 endfunction
 
-if has('python3')
-  command! -buffer TernDoc py3 tern_lookupDocumentation()
-  command! -buffer TernDocBrowse py3 tern_lookupDocumentation(browse=True)
-  command! -buffer TernType py3 tern_lookupType()
-  command! -buffer TernDef py3 tern_lookupDefinition("edit")
-  command! -buffer TernDefPreview py3 tern_lookupDefinition("pedit")
-  command! -buffer TernDefSplit py3 tern_lookupDefinition("split")
-  command! -buffer TernDefTab py3 tern_lookupDefinition("tabe")
-  command! -buffer TernRefs py3 tern_refs()
-  command! -buffer TernRename exe 'py3 tern_rename("'.input("new name? ",expand("<cword>")).'")'
-elseif has('python')
-  command! -buffer TernDoc py tern_lookupDocumentation()
-  command! -buffer TernDocBrowse py tern_lookupDocumentation(browse=True)
-  command! -buffer TernType py tern_lookupType()
-  command! -buffer TernDef py tern_lookupDefinition("edit")
-  command! -buffer TernDefPreview py tern_lookupDefinition("pedit")
-  command! -buffer TernDefSplit py tern_lookupDefinition("split")
-  command! -buffer TernDefTab py tern_lookupDefinition("tabe")
-  command! -buffer TernRefs py tern_refs()
-  command! -buffer TernRename exe 'py tern_rename("'.input("new name? ",expand("<cword>")).'")'
-endif
-
 if !exists('g:tern_show_argument_hints')
   let g:tern_show_argument_hints = 'no'
 endif
@@ -136,6 +114,29 @@ function! tern#Enable()
   if stridx(&buftype, "nofile") > -1 || stridx(&buftype, "nowrite") > -1
     return
   endif
+
+  if has('python3')
+    command! -buffer TernDoc py3 tern_lookupDocumentation()
+    command! -buffer TernDocBrowse py3 tern_lookupDocumentation(browse=True)
+    command! -buffer TernType py3 tern_lookupType()
+    command! -buffer TernDef py3 tern_lookupDefinition("edit")
+    command! -buffer TernDefPreview py3 tern_lookupDefinition("pedit")
+    command! -buffer TernDefSplit py3 tern_lookupDefinition("split")
+    command! -buffer TernDefTab py3 tern_lookupDefinition("tabe")
+    command! -buffer TernRefs py3 tern_refs()
+    command! -buffer TernRename exe 'py3 tern_rename("'.input("new name? ",expand("<cword>")).'")'
+  elseif has('python')
+    command! -buffer TernDoc py tern_lookupDocumentation()
+    command! -buffer TernDocBrowse py tern_lookupDocumentation(browse=True)
+    command! -buffer TernType py tern_lookupType()
+    command! -buffer TernDef py tern_lookupDefinition("edit")
+    command! -buffer TernDefPreview py tern_lookupDefinition("pedit")
+    command! -buffer TernDefSplit py tern_lookupDefinition("split")
+    command! -buffer TernDefTab py tern_lookupDefinition("tabe")
+    command! -buffer TernRefs py tern_refs()
+    command! -buffer TernRename exe 'py tern_rename("'.input("new name? ",expand("<cword>")).'")'
+  endif
+
   let b:ternProjectDir = ''
   let b:ternLastCompletion = []
   let b:ternLastCompletionPos = {'row': -1, 'start': 0, 'end': 0}
