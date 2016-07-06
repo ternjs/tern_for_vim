@@ -36,7 +36,10 @@ def tern_makeRequest(port, doc, silent=False):
     return json.loads(result)
   except HTTPError as error:
     if not silent:
-      tern_displayError(error.read())
+      message = error.read()
+      if not PY2:
+        message = message.decode('utf-8')
+      tern_displayError(message)
     return None
 
 # Prefixed with _ to influence destruction order. See
