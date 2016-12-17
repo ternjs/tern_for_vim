@@ -1,4 +1,4 @@
-import vim, os, platform, subprocess, webbrowser, json, re, string, time
+import vim, os, platform, subprocess, webbrowser, json, re, time
 import sys
 PY2 = int(sys.version[0]) == 2
 if PY2:
@@ -440,7 +440,7 @@ def tern_rename(newName):
     if buffer is None:
       with open(file, "w") as f:
         f.writelines(lines)
-      external.append({"name": file, "text": string.join(lines, ""), "type": "full"})
+      external.append({"name": file, "text": "".join(lines), "type": "full"})
   if len(external):
     tern_sendBuffer(external)
   vim.command("call setloclist(0," + json.dumps(changes) + ") | lopen")
