@@ -97,6 +97,10 @@ if !exists('g:tern_request_timeout')
   let g:tern_request_timeout = 1
 endif
 
+if !exists('g:tern_ignorecase')
+  let g:tern_ignorecase = 0
+endif
+
 function! tern#DefaultKeyMap(...)
   let prefix = len(a:000)==1 ? a:1 : "<LocalLeader>"
   execute 'nnoremap <buffer> '.prefix.'tD' ':TernDoc<CR>'
