@@ -443,4 +443,6 @@ def tern_rename(newName):
       external.append({"name": file, "text": "".join(lines), "type": "full"})
   if len(external):
     tern_sendBuffer(external)
-  vim.command("call setloclist(0," + json.dumps(changes) + ") | lopen")
+
+  if vim.eval("g:tern_show_loc_after_rename") == '1':
+    vim.command("call setloclist(0," + json.dumps(changes) + ") | lopen")

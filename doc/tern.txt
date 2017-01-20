@@ -166,3 +166,9 @@ information see 'noshowmode'.
 Defaults to 0. Can be set to 1 to display function signatures in the completion
 menu. Function signatures include parameter names, their type, and whether the
 parameter is optional.
+
+-------------------------------------------------------------------------------
+                                                    *tern_show_loc_after_rename*
+
+Defaults to 1. Can be set to 0 to avoid showing the location list after
+renaming an identifier.

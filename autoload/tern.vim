@@ -97,6 +97,10 @@ if !exists('g:tern_request_timeout')
   let g:tern_request_timeout = 1
 endif
 
+if !exists('g:tern_show_loc_after_rename')
+  let g:tern_show_loc_after_rename = 1
+endif
+
 function! tern#DefaultKeyMap(...)
   let prefix = len(a:000)==1 ? a:1 : "<LocalLeader>"
   execute 'nnoremap <buffer> '.prefix.'tD' ':TernDoc<CR>'
