@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "0.5.0",
   "author": "Marijn Haverbeke <marijnh@gmail.com>",
-  "description": "Sublime Text package for Vim",
+  "description": "Vim plugin for Tern",
   "repository": {
     "type": "git",
     "url": "git://github.com/ternjs/tern_for_vim.git"
