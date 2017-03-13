@@ -28,7 +28,10 @@ def tern_makeRequest(port, doc, silent=False):
   if not PY2:
     payload = payload.encode('utf-8')
   try:
-    req = opener.open("http://localhost:" + str(port) + "/", payload,
+    localhost = 'localhost'
+    if platform.system().lower()=='windows':
+        localhost = '127.0.0.1'
+    req = opener.open("http://" + localhost + ":" + str(port) + "/", payload,
                       float(vim.eval("g:tern_request_timeout")))
     result = req.read()
     if not PY2:
