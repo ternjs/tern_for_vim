@@ -334,7 +334,7 @@ def tern_lookupArgumentHints(fname, apos):
                          True, True)
   if data: tern_echoWrap(data.get("type", ""),name=fname)
 
-def tern_lookupDefinition(cmd):
+def tern_lookupDefinition(cmd, add_jump_position=True):
   data = tern_runCommand("definition", fragments=False)
   if data is None: return
 
@@ -344,7 +344,8 @@ def tern_lookupDefinition(cmd):
     filename = data["file"]
 
     if cmd == "edit" and filename == tern_relativeFile():
-      vim.command("normal! m`")
+      if add_jump_position:
+        vim.command("normal! m`")
       vim.command("call cursor(" + str(lnum) + "," + str(col) + ")")
     else:
       vim.command(cmd + " +call\ cursor(" + str(lnum) + "," + str(col) + ") " +
