@@ -97,6 +97,10 @@ if !exists('g:tern_request_timeout')
   let g:tern_request_timeout = 1
 endif
 
+if !exists('g:tern_request_query')
+  let g:tern_request_query = {}
+endif
+
 if !exists('g:tern_show_loc_after_rename')
   let g:tern_show_loc_after_rename = 1
 endif
