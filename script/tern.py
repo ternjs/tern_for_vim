@@ -267,8 +267,15 @@ def tern_ensureCompletionCached():
       (not re.match(".*\\W", curLine[int(cached["end"]):curCol]))):
     return
 
-  data = tern_runCommand({"type": "completions", "types": True, "docs": True},
-                         {"line": curRow - 1, "ch": curCol})
+  ternRequestQuery = vim.eval('g:tern_request_query')
+  ternCompletionQuery = ternRequestQuery.get('completions')
+
+  if ternCompletionQuery is None:
+    ternCompletionQuery = dict()
+
+  completionQuery = dict({"type": "completions", "types": True, "docs": True}, **ternCompletionQuery)
+
+  data = tern_runCommand(completionQuery, {"line": curRow - 1, "ch": curCol})
   if data is None: return
 
   completions = []
