@@ -148,6 +148,8 @@ def tern_relativeFile():
   filename = vim.eval("expand('%:p')")
   if PY2:
     filename = filename.decode(vim.eval('&encoding'))
+  if platform.system().lower()=='windows':
+    return filename[len(tern_projectDir()) + 1:].replace('\\', '/')
   return filename[len(tern_projectDir()) + 1:]
 
 def tern_bufferSlice(buf, pos, end):
