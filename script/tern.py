@@ -319,7 +319,7 @@ def tern_lookupDocumentation(browse=False):
         return result
     doc = ((doc and doc + "\n\n") or "") + "See " + url
   if doc:
-    docstr = json.dumps(doc)
+    docstr = json.dumps(doc, ensure_ascii=False)
     if len(docstr) > 120:
       vim.command("call tern#PreviewInfo(" + docstr + ")")
     else:
