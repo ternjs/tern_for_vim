@@ -319,7 +319,7 @@ def tern_lookupDocumentation(browse=False):
         return result
     doc = ((doc and doc + "\n\n") or "") + "See " + url
   if doc:
-    vim.command("call tern#PreviewInfo(" + json.dumps(doc) + ")")
+    vim.command("call tern#PreviewInfo(" + json.dumps(doc, ensure_ascii=False) + ")")
   else:
     print("no documentation found")
 
