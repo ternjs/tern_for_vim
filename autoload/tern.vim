@@ -21,10 +21,15 @@ endif
 
 function! tern#PreviewInfo(info)
   pclose
+  let s:originalSplitBelow = &splitbelow
+  set splitbelow
   new +setlocal\ previewwindow|setlocal\ buftype=nofile|setlocal\ noswapfile|setlocal\ wrap
   exe "normal z" . &previewheight . "\<cr>"
   call append(0, type(a:info)==type("") ? split(a:info, "\n") : a:info)
   wincmd p
+  if (s:originalSplitBelow != 1)
+      set nosplitbelow
+  endif
 endfunction
 
 function! tern#Complete(findstart, complWord)
