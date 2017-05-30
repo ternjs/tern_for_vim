@@ -132,7 +132,7 @@ function! tern#Enable()
     command! -buffer TernDefSplit py3 tern_lookupDefinition("split")
     command! -buffer TernDefTab py3 tern_lookupDefinition("tabe")
     command! -buffer TernRefs py3 tern_refs()
-    command! -buffer TernRename exe 'py3 tern_rename("'.input("new name? ",expand("<cword>")).'")'
+    command! -buffer -nargs=? TernRename exe 'py3 tern_rename("'.(empty('<args>') ? input("new name? ",expand("<cword>")) : '<args>').'")'
   elseif has('python')
     command! -buffer TernDoc py tern_lookupDocumentation()
     command! -buffer TernDocBrowse py tern_lookupDocumentation(browse=True)
@@ -142,7 +142,7 @@ function! tern#Enable()
     command! -buffer TernDefSplit py tern_lookupDefinition("split")
     command! -buffer TernDefTab py tern_lookupDefinition("tabe")
     command! -buffer TernRefs py tern_refs()
-    command! -buffer TernRename exe 'py tern_rename("'.input("new name? ",expand("<cword>")).'")'
+    command! -buffer -nargs=? TernRename exe 'py tern_rename("'.(empty('<args>') ? input("new name? ",expand("<cword>")) : '<args>').'")'
   endif
 
   let b:ternProjectDir = ''
