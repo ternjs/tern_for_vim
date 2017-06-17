@@ -375,6 +375,23 @@ def tern_refs():
                  "text": name + " (file not loaded)" if len(text)==0 else text[0]})
   vim.command("call setloclist(0," + json.dumps(refs) + ") | lopen")
 
+
+def tern_refs2():
+  data = tern_runCommand("refs", fragments=False)
+  refs = []
+  if data is not None:
+    for ref in data["refs"]:
+      lnum     = ref["start"]["line"] + 1
+      col      = ref["start"]["ch"] + 1
+      filename = tern_projectFilePath(ref["file"])
+      name     = data["name"]
+      text     = vim.eval("getbufline('" + filename + "'," + str(lnum) + ")")
+      refs.append({"lnum": lnum,
+                  "col": col,
+                  "filename": filename,
+                  "text": name + " (file not loaded)" if len(text)==0 else text[0]})
+  vim.command("call DefaultTernHandler(" + json.dumps(refs) + ")")
+
 # Copied here because Python 2.6 and lower don't have it built in, and
 # python 3.0 and higher don't support old-style cmp= args to the sort
 # method. There's probably a better way to do this...
