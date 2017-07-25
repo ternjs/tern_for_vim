@@ -148,6 +148,8 @@ def tern_relativeFile():
   filename = vim.eval("expand('%:p')")
   if PY2:
     filename = filename.decode(vim.eval('&encoding'))
+  if platform.system().lower()=='windows':
+    return filename[len(tern_projectDir()) + 1:].replace('\\', '/')
   return filename[len(tern_projectDir()) + 1:]
 
 def tern_bufferSlice(buf, pos, end):
@@ -267,8 +269,15 @@ def tern_ensureCompletionCached():
       (not re.match(".*\\W", curLine[int(cached["end"]):curCol]))):
     return
 
-  data = tern_runCommand({"type": "completions", "types": True, "docs": True},
-                         {"line": curRow - 1, "ch": curCol})
+  ternRequestQuery = vim.eval('g:tern_request_query')
+  ternCompletionQuery = ternRequestQuery.get('completions')
+
+  if ternCompletionQuery is None:
+    ternCompletionQuery = dict()
+
+  completionQuery = dict({"type": "completions", "types": True, "docs": True}, **ternCompletionQuery)
+
+  data = tern_runCommand(completionQuery, {"line": curRow - 1, "ch": curCol})
   if data is None: return
 
   completions = []
@@ -310,7 +319,7 @@ def tern_lookupDocumentation(browse=False):
         return result
     doc = ((doc and doc + "\n\n") or "") + "See " + url
   if doc:
-    vim.command("call tern#PreviewInfo(" + json.dumps(doc) + ")")
+    vim.command("call tern#PreviewInfo(" + json.dumps(doc, ensure_ascii=False) + ")")
   else:
     print("no documentation found")
 
