@@ -179,7 +179,7 @@ def tern_bufferFragment():
       start = i
 
   if start is None: start = max(0, line - 50)
-  end = min(len(buf) - 1, line + 20)
+  end = min(len(buf), line + 20)
   return {"type": "part",
           "name": tern_relativeFile(),
           "text": tern_bufferSlice(buf, start, end),
