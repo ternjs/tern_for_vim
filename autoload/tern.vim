@@ -40,7 +40,7 @@ function! tern#Complete(findstart, complWord)
   else
     let rest = []
     for entry in b:ternLastCompletion
-      if entry["word"] =~ '^'. a:complWord
+      if entry["word"] =~ '^\V'. escape(a:complWord, '\')
         call add(rest, entry)
       endif
     endfor
