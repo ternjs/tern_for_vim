@@ -40,7 +40,7 @@ function! tern#Complete(findstart, complWord)
   else
     let rest = []
     for entry in b:ternLastCompletion
-      if stridx(entry["word"], a:complWord) == 0
+      if entry["word"] =~ '^'. a:complWord
         call add(rest, entry)
       endif
     endfor
