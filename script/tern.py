@@ -433,6 +433,8 @@ def tern_rename(newName):
     for buf in vim.buffers:
       if buf.name == file:
         buffer = buf
+      if platform.system().lower()=='windows' and buf.name == file.replace('/', '\\'):
+        buffer = buf
 
     if buffer is not None:
       lines = buffer
@@ -465,7 +467,7 @@ def tern_rename(newName):
   if len(external):
     tern_sendBuffer(external)
 
-  vim.command("checktime | call setloclist(0," + json.dumps(changes) + ")")
+  vim.command("call setloclist(0," + json.dumps(changes) + ")")
   if vim.eval("g:tern_show_loc_after_rename") == '1':
     vim.command("lopen")
   else:
