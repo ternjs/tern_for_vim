@@ -465,7 +465,7 @@ def tern_rename(newName):
   if len(external):
     tern_sendBuffer(external)
 
-  vim.command("call setloclist(0," + json.dumps(changes) + ")")
+  vim.command("checktime | call setloclist(0," + json.dumps(changes) + ")")
   if vim.eval("g:tern_show_loc_after_rename") == '1':
     vim.command("lopen")
   else:
