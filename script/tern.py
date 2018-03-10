@@ -31,6 +31,10 @@ def tern_makeRequest(port, doc, silent=False):
     localhost = 'localhost'
     if platform.system().lower()=='windows':
         localhost = '127.0.0.1'
+    # file=open("/tmp/ternrequest", "w")
+    # file.write(json.dumps(doc))
+    # file.close()
+
     req = opener.open("http://" + localhost + ":" + str(port) + "/", payload,
                       float(vim.eval("g:tern_request_timeout")))
     result = req.read()
