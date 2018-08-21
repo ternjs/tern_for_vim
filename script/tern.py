@@ -414,6 +414,7 @@ def tern_cmp_to_key(mycmp):
   return K
 
 def tern_rename(newName):
+  if not newName: return
   data = tern_runCommand({"type": "rename", "newName": newName}, fragments=False)
   if data is None: return
 
