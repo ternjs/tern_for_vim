@@ -40,7 +40,7 @@ function! tern#Complete(findstart, complWord)
   else
     let rest = []
     for entry in b:ternLastCompletion
-      if stridx(entry["word"], a:complWord) == 0
+      if entry["word"] =~ '^\V'. escape(a:complWord, '\')
         call add(rest, entry)
       endif
     endfor
@@ -103,6 +103,10 @@ endif
 
 if !exists('g:tern_show_loc_after_rename')
   let g:tern_show_loc_after_rename = 1
+endif
+
+if !exists('g:tern_show_loc_after_refs')
+  let g:tern_show_loc_after_refs = 1
 endif
 
 function! tern#DefaultKeyMap(...)

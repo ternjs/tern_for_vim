@@ -1,3 +1,8 @@
+if !has('python') && !has('python3')
+  echo 'tern requires python support'
+  finish
+endif
+
 call tern#Enable()
 
 " Menu 

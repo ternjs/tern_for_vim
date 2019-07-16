@@ -6,6 +6,10 @@ JavaScript editing support.
 [vim]: http://www.vim.org/
 [tern]: http://ternjs.net
 
+**NOTE**: This project is not being actively maintained right now. If
+you'd be interested in becoming a maintainer, write me or open an
+issue.
+
 In JavaScript files, the package will hook into
 [omni completion][omni] to handle autocompletion, and provide the
 following commands:
