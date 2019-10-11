@@ -9,6 +9,8 @@
     "url": "git://github.com/ternjs/tern_for_vim.git"
   },
   "dependencies": {
-    "tern": ">=0.5"
+    "acorn": "^5.3.0",
+    "tern": ">=0.5",
+    "tern-jsx": "^1.0.2"
   }
 }

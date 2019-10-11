@@ -31,6 +31,10 @@ def tern_makeRequest(port, doc, silent=False):
     localhost = 'localhost'
     if platform.system().lower()=='windows':
         localhost = '127.0.0.1'
+    # file=open("/tmp/ternrequest", "w")
+    # file.write(json.dumps(doc))
+    # file.close()
+
     req = opener.open("http://" + localhost + ":" + str(port) + "/", payload,
                       float(vim.eval("g:tern_request_timeout")))
     result = req.read()
@@ -354,7 +358,7 @@ def tern_lookupArgumentHints(fname, apos):
                          True, True)
   if data: tern_echoWrap(data.get("type", ""),name=fname)
 
-def tern_lookupDefinition(cmd):
+def tern_lookupDefinition(cmd, add_jump_position=True):
   data = tern_runCommand("definition", fragments=False)
   if data is None: return
 
@@ -364,7 +368,8 @@ def tern_lookupDefinition(cmd):
     filename = data["file"]
 
     if cmd == "edit" and filename == tern_relativeFile():
-      vim.command("normal! m`")
+      if add_jump_position:
+        vim.command("normal! m`")
       vim.command("call cursor(" + str(lnum) + "," + str(col) + ")")
     else:
       vim.command(cmd + " +call\ cursor(" + str(lnum) + "," + str(col) + ") " +
@@ -400,6 +405,23 @@ def tern_refs():
     curRow, curCol = vim.current.window.cursor
     index = next((i for i,ref in enumerate(refs) if ref["lnum"] == curRow), None)
     if index is not None: vim.command(str(index + 1) + "ll")
+
+
+def tern_refs2():
+  data = tern_runCommand("refs", fragments=False)
+  refs = []
+  if data is not None:
+    for ref in data["refs"]:
+      lnum     = ref["start"]["line"] + 1
+      col      = ref["start"]["ch"] + 1
+      filename = tern_projectFilePath(ref["file"])
+      name     = data["name"]
+      text     = vim.eval("getbufline('" + filename + "'," + str(lnum) + ")")
+      refs.append({"lnum": lnum,
+                  "col": col,
+                  "filename": filename,
+                  "text": name + " (file not loaded)" if len(text)==0 else text[0]})
+  vim.command("call DefaultTernHandler(" + json.dumps(refs) + ")")
 
 # Copied here because Python 2.6 and lower don't have it built in, and
 # python 3.0 and higher don't support old-style cmp= args to the sort
