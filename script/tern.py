@@ -367,7 +367,7 @@ def tern_lookupDefinition(cmd):
       vim.command("normal! m`")
       vim.command("call cursor(" + str(lnum) + "," + str(col) + ")")
     else:
-      vim.command(cmd + " +call\ cursor(" + str(lnum) + "," + str(col) + ") " +
+      vim.command(cmd + " +call\\ cursor(" + str(lnum) + "," + str(col) + ") " +
         tern_projectFilePath(filename).replace(" ", "\\ "))
   elif "url" in data:
     print("see " + data["url"])
